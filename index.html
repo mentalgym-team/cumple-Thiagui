@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thiago · Mi primer añito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F1E2;
+    --card: #FBF8EE;
+    --text: #33402F;
+    --muted: #6E7562;
+    --line: #DDD7BE;
+    --panel: rgba(169, 188, 143, .32);
+    --accent: #5E7548;
+    --accent-text: #FFFFFF;
+    --field: #FFFDF6;
+    --clay: #C99476;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1F2A22; --card: #2A382E; --text: #F0EBDC; --muted: #B9C2A8; --line: #45564A;
+      --panel: rgba(169, 188, 143, .16); --accent: #D9B48F; --accent-text: #2A2117; --field: #232F26; --clay: #D9B48F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1F2A22; --card: #2A382E; --text: #F0EBDC; --muted: #B9C2A8; --line: #45564A;
+    --panel: rgba(169, 188, 143, .16); --accent: #D9B48F; --accent-text: #2A2117; --field: #232F26; --clay: #D9B48F;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Lora", Georgia, "Times New Roman", serif; font-size: 17px; line-height: 1.6;
+  }
+  h1, h2, .script { font-family: "Kaushan Script", "Brush Script MT", cursive; font-weight: 400; margin: 0; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 640px; margin: 0 auto; text-align: center; color: #33402F; position: relative; overflow: hidden;
+    background:
+      radial-gradient(60% 38% at 12% 22%, rgba(178, 200, 150, .65), transparent 70%),
+      radial-gradient(52% 34% at 92% 38%, rgba(233, 196, 160, .55), transparent 70%),
+      radial-gradient(70% 30% at 50% 62%, rgba(245, 226, 176, .7), transparent 75%),
+      linear-gradient(180deg, #DCE5C5 0%, #EDEBCB 55%, #F3E6C8 100%);
+  }
+  .bunting { display: block; width: 100%; height: auto; }
+  .hero-text { padding: 6px 24px 0; }
+  .hero h1 { font-size: clamp(4.6rem, 22vw, 7rem); line-height: 1.05; color: #2F5A43; }
+  .hero .sub { font-size: 1.2rem; font-weight: 600; margin: 4px 0 0; letter-spacing: .01em; }
+  .hero .tag { font-style: italic; margin: 8px auto 0; max-width: 26ch; color: #55604A; }
+  .land { display: block; width: 100%; height: auto; margin-top: 8px; }
+
+  /* ---------- Layout ---------- */
+  main { max-width: 560px; margin: 0 auto; padding: 0 24px 24px; }
+  section { padding-top: 40px; }
+  h2 { font-size: 2rem; line-height: 1.15; margin-bottom: 12px; color: var(--accent); }
+
+  .panel { background: var(--panel); border-radius: 26px; padding: 26px 22px; text-align: center; }
+  .panel .day { font-size: 1.45rem; font-weight: 600; line-height: 1.25; }
+  .panel .hrs { color: var(--muted); margin-top: 2px; }
+  .panel hr { border: 0; border-top: 1px solid var(--line); margin: 20px auto; width: 40%; }
+  .panel .place { font-size: 1.45rem; font-weight: 600; line-height: 1.25; }
+  .panel .addr { color: var(--muted); margin-top: 2px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 18px; }
+  .link {
+    display: inline-block; padding: 9px 18px; border-radius: 999px; border: 1.5px solid var(--accent);
+    color: var(--accent); text-decoration: none; font-size: .95rem; font-weight: 600;
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--clay); outline-offset: 2px; }
+
+  .notes { list-style: none; margin: 0; padding: 0; }
+  .notes li { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+  .notes li:last-child { border-bottom: 0; }
+  .notes .ico { font-size: 1.5rem; width: 2rem; text-align: center; }
+
+  .count { display: flex; justify-content: center; gap: 0; text-align: center; }
+  .count div { padding: 0 22px; }
+  .count div + div { border-left: 1px solid var(--line); }
+  .count b { display: block; font-family: "Lora", Georgia, serif; font-size: 2.6rem; font-weight: 600; line-height: 1.1; color: var(--accent); }
+  .count span { color: var(--muted); font-size: .95rem; }
+  .done { font-style: italic; text-align: center; }
+  .center { text-align: center; }
+
+  /* ---------- RSVP ---------- */
+  .lead { color: var(--muted); margin: 0 0 18px; }
+  .rsvp { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 24px 20px 22px; }
+  label, legend { display: block; font-weight: 600; margin-bottom: 6px; padding: 0; }
+  fieldset { border: 0; margin: 0 0 18px; padding: 0; }
+  .field { margin-bottom: 18px; }
+  input[type="text"] {
+    width: 100%; font: inherit; color: var(--text); background: var(--field);
+    border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px;
+  }
+  .choices { display: grid; gap: 8px; }
+  .choices input { position: absolute; opacity: 0; pointer-events: none; }
+  .choices label {
+    margin: 0; padding: 12px 16px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--field);
+    font-weight: 400; cursor: pointer;
+  }
+  .choices input:checked + label { border-color: var(--accent); background: var(--accent); color: var(--accent-text); font-weight: 600; }
+  .choices input:focus-visible + label { outline: 3px solid var(--clay); outline-offset: 2px; }
+  .stepper { display: flex; align-items: center; gap: 14px; }
+  .stepper button {
+    width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--accent); background: transparent;
+    color: var(--accent); font-size: 1.4rem; cursor: pointer; line-height: 1;
+  }
+  .stepper output { font-size: 1.7rem; font-weight: 600; min-width: 2ch; text-align: center; }
+  .stepper span { color: var(--muted); }
+  .send {
+    width: 100%; font: inherit; font-size: 1.1rem; font-weight: 600; padding: 15px 20px; border: 0;
+    border-radius: 999px; background: var(--accent); color: var(--accent-text); cursor: pointer;
+  }
+  .hint { color: var(--muted); font-size: .9rem; margin: 12px 0 0; text-align: center; }
+  .error { color: #A63A2B; font-weight: 600; margin: 0 0 12px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .error { color: #F2B3A6; } }
+  :root[data-theme="dark"] .error { color: #F2B3A6; }
+  [hidden] { display: none !important; }
+
+  /* ---------- Cierre ---------- */
+  .closing { text-align: center; padding: 56px 28px calc(64px + env(safe-area-inset-bottom, 0px)); max-width: 520px; margin: 0 auto; }
+  .closing svg { width: 34px; height: 34px; color: var(--clay); }
+  .closing p { margin: 14px 0 0; }
+  .closing .script { font-size: 1.9rem; color: var(--accent); line-height: 1.3; margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="bunting" viewBox="0 0 400 80" aria-hidden="true">
+    <path d="M-5 8 Q200 64 405 8" fill="none" stroke="#8B7C66" stroke-width="1.6"/>
+    <polygon points="16,16 44,20 30,48" fill="#D9A88A"/>
+    <polygon points="66,26 94,30 80,58" fill="#B7C596"/>
+    <polygon points="116,33 144,36 130,64" fill="#EAD7A8"/>
+    <polygon points="166,36 194,37 180,66" fill="#C9B79C"/>
+    <polygon points="216,36 244,35 230,64" fill="#D9A88A"/>
+    <polygon points="266,33 294,30 280,59" fill="#B7C596"/>
+    <polygon points="316,27 344,22 330,51" fill="#EAD7A8"/>
+    <polygon points="361,19 389,13 375,42" fill="#C9B79C"/>
+  </svg>
+  <div class="hero-text">
+    <h1>Thiago</h1>
+    <p class="sub">Mi primer añito y bautismo</p>
+    <p class="tag">Una tarde de safari para compartir en familia</p>
+  </div>
+  <svg class="land" viewBox="0 0 400 200" role="img" aria-label="Paisaje de sabana con jirafas, elefantes y acacias al atardecer">
+    <circle cx="300" cy="78" r="58" fill="#F3DDB0" opacity=".35"/>
+    <circle cx="300" cy="78" r="36" fill="#F1D7A3" opacity=".9"/>
+    <path d="M0 132 Q70 104 140 124 T280 118 T400 126 V200 H0Z" fill="#D8DFBE"/>
+    <path d="M0 148 Q90 122 180 142 T400 138 V200 H0Z" fill="#C6D1A6"/>
+    <!-- acacias -->
+    <g fill="#8C6B53"><path d="M34 150 L36 118 L40 118 L42 150Z"/><path d="M36 128 L24 116 L27 114 L38 124Z"/></g>
+    <g fill="#8FA377"><ellipse cx="38" cy="112" rx="30" ry="8"/><ellipse cx="26" cy="118" rx="15" ry="5" opacity=".9"/></g>
+    <g fill="#8C6B53" transform="translate(300 8)"><path d="M34 144 L36 122 L39 122 L41 144Z"/></g>
+    <g fill="#9BAE82" transform="translate(300 8)"><ellipse cx="38" cy="118" rx="22" ry="6"/></g>
+    <!-- suelo -->
+    <path d="M0 162 Q100 148 200 160 T400 154 V200 H0Z" fill="#D9BE9C"/>
+    <!-- jirafa grande -->
+    <g transform="translate(112 168) scale(1.2)" fill="#B08F70">
+      <g transform="translate(0 -32)">
+        <ellipse cx="0" cy="0" rx="20" ry="10"/>
+        <path d="M11 -6 L19 -50 L26 -47 L23 -2Z"/>
+        <ellipse cx="27" cy="-52" rx="8" ry="4.2" transform="rotate(-18 27 -52)"/>
+        <rect x="-16" y="6" width="3.2" height="27"/><rect x="-8" y="7" width="3.2" height="26"/>
+        <rect x="8" y="7" width="3.2" height="26"/><rect x="15" y="6" width="3.2" height="27"/>
+        <path d="M-19 -3 Q-27 4 -25 16" stroke="#B08F70" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <rect x="22" y="-60" width="1.6" height="6"/><rect x="27" y="-60" width="1.6" height="6"/>
+        <g fill="#94765A"><circle cx="-8" cy="-2" r="3"/><circle cx="2" cy="3" r="2.6"/><circle cx="8" cy="-3" r="2.4"/><circle cx="19" cy="-24" r="2.3"/><circle cx="21" cy="-38" r="2"/></g>
+      </g>
+    </g>
+    <!-- jirafa chica -->
+    <g transform="translate(170 168) scale(.68)" fill="#BB9B7D">
+      <g transform="translate(0 -32)">
+        <ellipse cx="0" cy="0" rx="20" ry="10"/>
+        <path d="M11 -6 L19 -46 L26 -43 L23 -2Z"/>
+        <ellipse cx="27" cy="-48" rx="8" ry="4.2" transform="rotate(-18 27 -48)"/>
+        <rect x="-16" y="6" width="3.2" height="27"/><rect x="-8" y="7" width="3.2" height="26"/>
+        <rect x="8" y="7" width="3.2" height="26"/><rect x="15" y="6" width="3.2" height="27"/>
+      </g>
+    </g>
+    <!-- elefante -->
+    <g transform="translate(272 170) scale(1)" fill="#A79C8A">
+      <g transform="translate(0 -30)">
+        <ellipse cx="0" cy="0" rx="29" ry="17"/>
+        <circle cx="31" cy="-6" r="13"/>
+        <path d="M41 -1 Q51 9 44 24" stroke="#A79C8A" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <ellipse cx="24" cy="-3" rx="8" ry="11" fill="#948977"/>
+        <rect x="-23" y="9" width="10" height="21"/><rect x="-9" y="10" width="10" height="20"/>
+        <rect x="8" y="10" width="10" height="20"/><rect x="19" y="9" width="10" height="21"/>
+        <path d="M-29 -4 Q-35 4 -33 15" stroke="#A79C8A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M40 3 Q46 6 46 11" stroke="#EFE6D2" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+    <!-- elefante chico -->
+    <g transform="translate(338 170) scale(.55)" fill="#B3A997">
+      <g transform="translate(0 -30)">
+        <ellipse cx="0" cy="0" rx="29" ry="17"/>
+        <circle cx="31" cy="-6" r="13"/>
+        <path d="M41 -1 Q51 9 44 24" stroke="#B3A997" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <rect x="-23" y="9" width="10" height="21"/><rect x="-9" y="10" width="10" height="20"/>
+        <rect x="8" y="10" width="10" height="20"/><rect x="19" y="9" width="10" height="21"/>
+      </g>
+    </g>
+    <!-- pájaros -->
+    <g fill="none" stroke="#7A705F" stroke-width="1.4" stroke-linecap="round">
+      <path d="M176 44 q5 -5 10 0 q5 -5 10 0"/><path d="M214 30 q4 -4 8 0 q4 -4 8 0"/>
+    </g>
+    <!-- transición al fondo de la página -->
+    <path d="M0 188 Q100 176 200 186 T400 182 V201 H0Z" style="fill: var(--bg)"/>
+  </svg>
+</header>
+
+<main>
+  <section aria-labelledby="h-datos">
+    <div class="panel" id="h-datos">
+      <div class="day">Domingo 25 de octubre</div>
+      <div class="hrs">de 12 a 18 hs</div>
+      <hr>
+      <div class="place">Loma de Rodeo</div>
+      <div class="addr">Camino de Carrindanga, km 8,5 · Bahía Blanca</div>
+      <div class="links">
+        <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Loma+de+Rodeo+Camino+de+Carrindanga+km+8.5+Bahia+Blanca">Cómo llegar</a>
+        <a class="link" id="cal" target="_blank" rel="noopener" href="#">Agendar</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-notas">
+    <h2 id="h-notas">Para pasar un lindo día</h2>
+    <ul class="notes">
+      <li><span class="ico" aria-hidden="true">🧉</span><span>Traer mate y reposera.</span></li>
+      <li><span class="ico" aria-hidden="true">🚲</span><span>Los niños pueden llevar bicicletas.</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-count" class="center">
+    <h2 id="h-count">Falta poquito</h2>
+    <div class="count" id="count" role="timer">
+      <div><b id="d">–</b><span>días</span></div>
+      <div><b id="h">–</b><span>horas</span></div>
+      <div><b id="m">–</b><span>minutos</span></div>
+    </div>
+    <p class="done" id="done" hidden>Ya vivimos este día tan soñado. Gracias por estar.</p>
+  </section>
+
+  <section aria-labelledby="h-rsvp">
+    <h2 id="h-rsvp">¿Te espero?</h2>
+    <p class="lead">Confirmame antes del 25 de septiembre.</p>
+    <form class="rsvp" id="rsvp" novalidate>
+      <div class="field">
+        <label for="nombre">Tu nombre</label>
+        <input type="text" id="nombre" autocomplete="name" placeholder="Nombre y apellido">
+      </div>
+
+      <fieldset>
+        <legend>¿Venís?</legend>
+        <div class="choices">
+          <input type="radio" name="resp" id="r-si" value="si" checked><label for="r-si">Sí, ahí voy</label>
+          <input type="radio" name="resp" id="r-no" value="no"><label for="r-no">No voy a poder</label>
+        </div>
+      </fieldset>
+
+      <div class="field" id="personas-wrap">
+        <label id="personas-l">¿Cuántos vienen? (con vos)</label>
+        <div class="stepper" role="group" aria-labelledby="personas-l">
+          <button type="button" id="menos" aria-label="Una persona menos">−</button>
+          <output id="personas" aria-live="polite">1</output>
+          <button type="button" id="mas" aria-label="Una persona más">+</button>
+          <span id="pers-txt">persona</span>
+        </div>
+      </div>
+
+      <p class="error" id="err" hidden></p>
+      <button class="send" type="submit">Confirmar por WhatsApp</button>
+      <p class="hint">Se abre WhatsApp con tu respuesta lista para enviar.</p>
+    </form>
+  </section>
+</main>
+
+<footer class="closing">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2 0 3.7 1.1 5.4 3.2 1.7-2.1 3.4-3.2 5.4-3.2 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>
+  <p>Este primer año fue el más lindo de nuestras vidas. Verlo crecer, sonreír y descubrir el mundo nos llenó el corazón de una manera que no sabíamos que existía.</p>
+  <p>Que estés a nuestro lado en este día tan especial es el regalo más grande.</p>
+  <p class="script">Gracias por ser parte de su historia</p>
+  <p>Con todo nuestro amor,<br>Thiago y su familia</p>
+</footer>
+
+<script>
+(function () {
+  // Número de WhatsApp que recibe las confirmaciones: con código de país, sin +, sin espacios (ej.: 5492915551234).
+  var WA_NUMBER = "542916417141";
+
+  var EVENT_START = new Date("2026-10-25T12:00:00-03:00");
+
+  document.getElementById("cal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent("Primer añito y bautismo de Thiago") +
+    "&dates=20261025T150000Z/20261025T210000Z" +
+    "&location=" + encodeURIComponent("Loma de Rodeo, Camino de Carrindanga km 8,5, Bahía Blanca") +
+    "&details=" + encodeURIComponent("Traer mate y reposera. Los niños pueden llevar bicicletas.");
+
+  var dEl = document.getElementById("d"), hEl = document.getElementById("h"), mEl = document.getElementById("m");
+  function tick() {
+    var diff = EVENT_START - new Date();
+    if (diff <= 0) {
+      document.getElementById("count").hidden = true;
+      document.getElementById("done").hidden = false;
+      return;
+    }
+    var mins = Math.floor(diff / 60000);
+    dEl.textContent = Math.floor(mins / 1440);
+    hEl.textContent = Math.floor((mins % 1440) / 60);
+    mEl.textContent = mins % 60;
+  }
+  tick();
+  setInterval(tick, 30000);
+
+  var n = 1;
+  var out = document.getElementById("personas");
+  var txt = document.getElementById("pers-txt");
+  function paint() { out.textContent = n; txt.textContent = n === 1 ? "persona" : "personas"; }
+  document.getElementById("menos").addEventListener("click", function () { if (n > 1) { n--; paint(); } });
+  document.getElementById("mas").addEventListener("click", function () { if (n < 15) { n++; paint(); } });
+
+  var wrap = document.getElementById("personas-wrap");
+  document.querySelectorAll('input[name="resp"]').forEach(function (r) {
+    r.addEventListener("change", function () {
+      wrap.hidden = (document.querySelector('input[name="resp"]:checked').value === "no");
+    });
+  });
+
+  var err = document.getElementById("err");
+  document.getElementById("rsvp").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nombre = document.getElementById("nombre").value.trim();
+    if (!nombre) {
+      err.textContent = "Escribí tu nombre para poder confirmar.";
+      err.hidden = false;
+      document.getElementById("nombre").focus();
+      return;
+    }
+    err.hidden = true;
+    var resp = document.querySelector('input[name="resp"]:checked').value;
+    var texto = "Hola! Soy " + nombre + ". ";
+    if (resp === "si") {
+      texto += "Confirmo asistencia al primer añito de Thiago (25/10). Somos " + n + (n === 1 ? " persona." : " personas.");
+    } else {
+      texto += "No voy a poder ir al cumple de Thiago (25/10), pero les mando un abrazo enorme.";
+    }
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(texto), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>
